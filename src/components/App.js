@@ -1,11 +1,19 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import '../styles/App.css';
 
 import { client } from "../utils/lotrClient.js";
 import Quote from './Quote';
 
 export default function App() {
-  const [dialog, setDialog] = useState('No quote yet...');
+  const [dialog, setDialog] = useState('...');
+
+  React.useEffect(() => {
+    const getJsonResponse = async () => {
+      const responseJson = await client.fetchQuotes();
+      setDialog(responseJson.docs[0].dialog);
+    };
+    getJsonResponse();
+  }, []);
 
   return (
     <div className="App">
