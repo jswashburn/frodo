@@ -2,12 +2,22 @@ import { constants } from "./constants";
 
 export const client = {
     fetchQuotes: async () => {
-        let response = await fetch(`${constants.apimEndpoint}/quote`, {
+        const response = await fetch(`${constants.apimEndpoint}/quote`, {
             method: 'GET'
         });
     
-        let quotes = await response.json();
+        const quotes = await response.json();
     
         return quotes;   
+    },
+
+    fetchCharacterById: async id => {
+        const response = await fetch(`${constants.apimEndpoint}/character/${id}`, {
+            method: 'GET'
+        });
+
+        const character = await response.json();
+
+        return character;
     }
 }
