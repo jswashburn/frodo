@@ -2,3 +2,7 @@ button {
     background-color: burlywood;
     padding: 0.3rem;
 }
+
+.RateLimitReachedAlert {
+    color: red;
+}
