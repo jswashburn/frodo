@@ -16,7 +16,7 @@ export default function App() {
           })
         }
       >
-        Get a random Lord of the Rings quote
+        Click here for a random Lord of the Rings quote
       </button>
       <Quote dialog={dialog}/>
     </div>
