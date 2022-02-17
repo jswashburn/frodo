@@ -1,34 +1,39 @@
 import { constants } from "./constants";
 
-const fetchRandomQuote = async () => {
-    const response = await fetch(`${constants.apimEndpoint}/quote`, {
-        method: 'GET'
-    });
+// TODO: The One API only returns 1000 quotes at a time, but there are over 1000 quotes in their db - so pagination here is needed to get all of them
+export const fetchQuotes = async () => {
+  let response;
+  let allQuotesArray = [];
+  let totalPages;
+  let currentPage = 1;
+  do {
+    response = await fetch(
+      `${constants.apimEndpoint}/quote?page=${currentPage}`,
+      {
+        method: "GET",
+      }
+    );
 
-    return response;
-}
+    const json = await response.json();
+    totalPages = json.pages;
 
-const fetchCharacterById = async id => {
-    const response = await fetch(`${constants.apimEndpoint}/character/${id}`, {
-        method: 'GET'
-    });
+    const pageQuotes = json.docs;
+    allQuotesArray = allQuotesArray.concat(pageQuotes);
 
-    return response;
-}
-    
-export const client = {
+    currentPage++;
+  } while (currentPage <= totalPages);
 
-    fetchRandomCharacterQuote: async () => {
-        const quoteResponse = await fetchRandomQuote();
-        const quoteJson = await quoteResponse.json();
-        const characterResponse = await fetchCharacterById(quoteJson.docs[0].character);
-        const characterJson = await characterResponse.json();
+  console.log(allQuotesArray);
 
-        const characterQuote = {
-            character: characterJson,
-            quote: quoteJson
-        };
+  return allQuotesArray;
+};
 
-        return characterQuote;
-    }
-}
+export const fetchAllCharacters = async () => {
+  const response = await fetch(`${constants.apimEndpoint}/character`, {
+    method: "GET",
+  });
+
+  const responseJson = await response.json();
+
+  return responseJson.docs;
+};
