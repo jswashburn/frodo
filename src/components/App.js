@@ -11,7 +11,6 @@ export default function App() {
   });
   const [characters, setCharacters] = useState([]);
   const [quotes, setQuotes] = useState([]);
-  const [ready, setReady] = useState(false);
 
   const updateQuoteDisplay = (quoteArray, characterArray) => {
     // grab random quote
@@ -38,8 +37,6 @@ export default function App() {
       setQuotes(fetchedQuotes);
       setCharacters(fetchedCharacters);
       updateQuoteDisplay(fetchedQuotes, fetchedCharacters);
-
-      setReady(true);
     };
     init();
   }, []);
