@@ -11,6 +11,7 @@ export default function App() {
   });
   const [characters, setCharacters] = useState([]);
   const [quotes, setQuotes] = useState([]);
+  const [ready, setReady] = useState(false);
 
   const updateQuoteDisplay = (quoteArray, characterArray) => {
     // grab random quote
@@ -29,6 +30,22 @@ export default function App() {
     });
   };
 
+  const renderQuoteDisplay = () => {
+    if (!ready) return (
+      <p>Loading...</p>
+    );
+
+    return (
+      <>
+        <QuoteDisplay
+          name={quoteDisplay.name}
+          dialogText={quoteDisplay.dialogText}
+        />
+        <p>Click anywhere for next quote...</p>
+      </>
+    );
+  }
+
   React.useEffect(() => {
     const init = async () => {
       const fetchedQuotes = await fetchQuotes();
@@ -37,17 +54,15 @@ export default function App() {
       setQuotes(fetchedQuotes);
       setCharacters(fetchedCharacters);
       updateQuoteDisplay(fetchedQuotes, fetchedCharacters);
+
+      setReady(true);
     };
     init();
   }, []);
 
   return (
     <div className="App" onClick={() => updateQuoteDisplay(quotes, characters)}>
-      <QuoteDisplay
-        name={quoteDisplay.name}
-        dialogText={quoteDisplay.dialogText}
-      />
-      <p>Click anywhere for next quote...</p>
+      {renderQuoteDisplay()}
     </div>
   );
 }
