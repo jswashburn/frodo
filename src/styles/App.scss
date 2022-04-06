@@ -1,5 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap");
 
+$font-size-0: 1.5rem;
+$font-size-1: 1rem;
+
 * {
   font-family: "Nunito Sans", sans-serif;
 }
@@ -16,21 +19,17 @@ button {
 
 body {
   background-color: rgb(204, 204, 204);
-  padding: 1.2rem;
-}
-
-.QuoteDisplay {
-  padding: 3rem;
 }
 
 .CharacterName {
-  font-size: 2rem;
+  font-size: $font-size-0;
   font-weight: bold;
+  padding-top: 1rem;
 }
 
 .DialogText {
   padding: 3rem;
-  font-size: 3rem;
+  font-size: $font-size-1;
   font-style: italic;
 }
 
@@ -52,4 +51,10 @@ body {
   -webkit-user-select: none; /* For Safari */
   -moz-user-select: none; /* For Firefox */
   -khtml-user-select: none; /* Konqueror HTML */
+}
+
+@media screen and (max-width: 375px) {
+  body {
+    padding: 0.5rem;
+  }
 }

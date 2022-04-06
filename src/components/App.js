@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../styles/App.css";
+import "../styles/App.scss";
 
 import { fetchQuotes, fetchAllCharacters } from "../utils/lotrClient.js";
 import { QuoteDisplay } from "./QuoteDisplay";
