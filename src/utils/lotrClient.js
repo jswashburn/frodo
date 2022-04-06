@@ -1,6 +1,5 @@
 import { constants } from "./constants";
 
-// TODO: The One API only returns 1000 quotes at a time, but there are over 1000 quotes in their db - so pagination here is needed to get all of them
 export const fetchQuotes = async () => {
   let response;
   let allQuotesArray = [];
@@ -22,8 +21,6 @@ export const fetchQuotes = async () => {
 
     currentPage++;
   } while (currentPage <= totalPages);
-
-  console.log(allQuotesArray);
 
   return allQuotesArray;
 };
