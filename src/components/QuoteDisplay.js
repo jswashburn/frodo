@@ -4,7 +4,7 @@ export function QuoteDisplay(props) {
   }
 
   return (
-    <div className="QuoteDisplay">
+    <div className="QuoteDisplay DisableTextSelection">
       <h2 className="CharacterName">{props.name}</h2>
       <p className="DialogText">"{props.dialogText}"</p>
     </div>

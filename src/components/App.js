@@ -41,7 +41,7 @@ export default function App() {
           name={quoteDisplay.name}
           dialogText={quoteDisplay.dialogText}
         />
-        <p>Click anywhere for next quote...</p>
+        <p className="DisableTextSelection">Click anywhere for next quote...</p>
       </>
     );
   }
