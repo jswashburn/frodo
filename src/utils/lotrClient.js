@@ -1,36 +1,27 @@
-import { constants } from "./constants";
-
-export const fetchQuotes = async () => {
+export const getAllDocs = async route => {
   let response;
-  let allQuotesArray = [];
+  let allDocs = [];
   let totalPages;
   let currentPage = 1;
   do {
     response = await fetch(
-      `${constants.apimEndpoint}/quote?page=${currentPage}`,
+      `${process.env.REACT_APP_THEONE_BASE_URL}/${route}?page=${currentPage}`,
       {
         method: "GET",
+        headers: {
+          "Authorization": `Bearer ${process.env.REACT_APP_API_KEY}`
+        }
       }
     );
 
     const json = await response.json();
     totalPages = json.pages;
 
-    const pageQuotes = json.docs;
-    allQuotesArray = allQuotesArray.concat(pageQuotes);
+    const docs = json.docs;
+    allDocs = allDocs.concat(docs);
 
     currentPage++;
   } while (currentPage <= totalPages);
 
-  return allQuotesArray;
-};
-
-export const fetchAllCharacters = async () => {
-  const response = await fetch(`${constants.apimEndpoint}/character`, {
-    method: "GET",
-  });
-
-  const responseJson = await response.json();
-
-  return responseJson.docs;
+  return allDocs;
 };
